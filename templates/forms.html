@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing</title>
+</head>
+
+<body>
+    <h1>Hallo</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.naam.label }} {{form.naam}}
+        <br>
+        {{ form.url.label}} {{form.url}}
+        <br>
+        {{ form.submit() }}
+    </form>
+
+</body>
+
+</html>

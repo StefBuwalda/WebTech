@@ -1,7 +1,9 @@
-from flask import Flask
+from flask import Flask, render_template, session
+from forms import ServiceForm
 
 # Create Flask instance
-app = Flask("__name__")
+app = Flask(__name__)
+app.config["SECRET_KEY"] = "mijngeheimesleutel"
 
 
 # Default app route
@@ -9,6 +11,16 @@ app = Flask("__name__")
 def index():
     # Return HTML content
     return "<h1>This is the default page</h1>"
+
+
+@app.route("/forms")
+def forms():
+    service_form = ServiceForm()
+
+    if service_form.validate_on_submit:  # type: ignore
+        session["name"]
+
+    return render_template("forms.html", form=service_form)
 
 
 # Prevent execution when imported by other script
