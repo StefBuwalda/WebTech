@@ -12,6 +12,11 @@ def index():
     # Return HTML content
     return "<h1>This is the default page</h1>"
 
+@app.route("/dashboard")
+def dashboard():
+    # Return Dashboard.html
+    return render_template("dashboard.html")
+
 
 @app.route("/forms", methods=["GET", "POST"])
 def forms():
