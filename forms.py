@@ -4,9 +4,9 @@ from wtforms.validators import DataRequired
 
 
 class ServiceForm(FlaskForm):
-    naam = StringField("Service naam:", validators=[DataRequired()])
+    name = StringField("Service name:", validators=[DataRequired()])
     url = URLField("Service URL:", validators=[DataRequired()])
-    submit = SubmitField("Toevoegen")
+    submit = SubmitField("Add")
 
 
 class LoginForm(FlaskForm):

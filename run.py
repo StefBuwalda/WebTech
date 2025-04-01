@@ -13,14 +13,16 @@ def index():
     return "<h1>This is the default page</h1>"
 
 
-@app.route("/forms")
+@app.route("/forms", methods=["GET", "POST"])
 def forms():
-    service_form = ServiceForm()
+    form = ServiceForm()
 
-    if service_form.validate_on_submit:  # type: ignore
-        session["name"]
+    if form.validate_on_submit:  # type: ignore
+        session["name"] = form.name.data
+        session["url"] = form.url.data
 
-    return render_template("forms.html", form=service_form)
+    form = ServiceForm(formdata=None)
+    return render_template("forms.html", form=form)
 
 
 # Prevent execution when imported by other script
