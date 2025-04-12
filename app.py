@@ -5,12 +5,11 @@ from flask_login import current_user, login_required
 
 # home route
 @app.route("/")
-@login_required
 def index():
     if current_user.is_authenticated:
-        return redirect(url_for("application.dash"))
+        return redirect(url_for("dash.index"))
     else:
-        return redirect(url_for("application.auth"))
+        return redirect(url_for("auth.login"))
 
 
 # App deployment
