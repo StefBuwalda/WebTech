@@ -1,7 +1,9 @@
+/* Base template */
 body {
     background-color: lightslategray;
 }
 
+/* Dashboard page */
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -22,6 +24,7 @@ body {
     background-color: whitesmoke;
 }
 
+/* Login page */
 form {
     display: block;
     margin-left: auto;
