@@ -14,9 +14,28 @@ body {
 
 .grid-container > div {
     text-align: center;
-    height: 100px;
+    height: fit-content;
     padding-top: 5px;
+    padding-bottom: 5px;
     border: 2px solid black;
     border-radius: 10px;
     background-color: whitesmoke;
+}
+
+form {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: fit-content;
+    width: fit-content;
+    border: 2px solid black;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 10px;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.submit {
+    padding-top: 10px;
 }
