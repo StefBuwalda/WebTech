@@ -17,8 +17,7 @@ migrate = Migrate(app, db)
 
 # bp import
 from application.auth.views import auth_blueprint
-
-# from application.strike.views import strike_blueprint
+from application.dash.views import dash_blueprint
 
 # Login manager
 from application.auth.models import User
@@ -35,5 +34,5 @@ def load_user(user_id):  # type: ignore
 
 # Blueprint magic
 
-# app.register_blueprint(strike_blueprint, url_prefix="/staking")
+app.register_blueprint(dash_blueprint, url_prefix="/dash")
 app.register_blueprint(auth_blueprint, url_prefix="/auth")

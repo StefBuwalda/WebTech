@@ -25,7 +25,7 @@ def login():
             user.password, password  # type: ignore
         ):
             login_user(user)  # type: ignore
-            return redirect(url_for("staking.strikers"))
+            return redirect(url_for("application.dash"))
         else:
             feedback = "Foutieve login."
 
