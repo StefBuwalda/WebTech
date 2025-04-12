@@ -27,6 +27,7 @@ def thanks():
 @dash_blueprint.route("/", methods=["GET", "POST"])
 @login_required
 def index():
+    """
     session["_flashes"] = []
     my_form = ServiceForm()
 
@@ -46,8 +47,9 @@ def index():
             return redirect(url_for("application.dash"))
         else:
             flash("Het formulier is niet goed ingevuld")
-
-    return render_template("dash.html", form=my_form)
+    """
+    # return render_template("dashboard.html", form=my_form)
+    return render_template("dashboard.html")
 
 
 """

@@ -1,0 +1,22 @@
+body {
+    background-color: lightslategray;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 20px;
+    background-color: lightslategray;
+    padding-top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.grid-container > div {
+    text-align: center;
+    height: 100px;
+    padding-top: 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: whitesmoke;
+}
