@@ -11,9 +11,19 @@ new_strikers = [
 
 """
 
-new_user = User(
-    username="admin", password=generate_password_hash("admin"), is_admin=True
-)
+new_users = [
+    User(
+        username="admin",
+        password=generate_password_hash("admin"),
+        is_admin=True,
+    ),
+    User(
+        username="test",
+        password=generate_password_hash("test123"),
+        is_admin=False,
+    ),
+]
+
 new_services = Service(name="test123", url="http://google.com")
 
 with app.app_context():
@@ -23,5 +33,5 @@ with app.app_context():
     db.session.commit()
     # Then add new
     db.session.add(new_services)
-    db.session.add(new_user)
+    db.session.add_all(new_users)
     db.session.commit()

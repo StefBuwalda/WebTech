@@ -16,6 +16,6 @@ def index():
 
 
 @dash_blueprint.route("/admin", methods=["GET", "POST"])
-# @admin_required
+@admin_required
 def admin():
     return render_template("admin.html")
