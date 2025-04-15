@@ -1,0 +1,24 @@
+{% extends 'base_template.html' %}
+
+{% block title %}
+Add service
+{% endblock %}
+
+{% block content %}
+{% if feedback %}
+<p>{{feedback}}</p>
+{% endif %}
+
+<form class="bg-body-tertiary" method="POST">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.name.label }} <br> {{ form.name() }}
+    </div>
+    <div>
+        {{ form.url.label }} <br> {{ form.url() }}
+    </div>
+    <div class="submit">
+        {{ form.submit() }}
+    </div>
+</form>
+{% endblock %}

@@ -26,5 +26,4 @@ def admin():
         password = register_form.password.data
         check_admin = register_form.admin.data
 
-
-    return render_template("admin.html")
+    return render_template("admin.html", form=register_form)
