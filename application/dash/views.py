@@ -51,11 +51,27 @@ def admin():
         return render_template(
             "admin.html",
             form=RegisterForm(formdata=None),
-            feedback="Account succesvol toegevoegd",
+            feedback="User succesfully added",
         )
     return render_template("admin.html", form=register_form)
 
 @dash_blueprint.route("/service", methods=["GET", "POST"])
 @login_required
 def service():
-    return render_template("add_service.html")
+    service_form = ServiceForm()
+
+    if service_form.validate_on_submit():
+        name = service_form.name.data
+        url = service_form.url.data
+        new_service = Service(
+            name=name,
+            url=url,
+        )
+        db.session.add(new_service)
+        db.session.commit()
+        return render_template(
+            "add_service.html",
+            form=ServiceForm(formdata=None),
+            feedback="Service succesfully added"
+        )
+    return render_template("add_service.html", form=service_form)
