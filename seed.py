@@ -11,7 +11,9 @@ new_strikers = [
 
 """
 
-new_user = User(username="admin", password=generate_password_hash("admin"))
+new_user = User(
+    username="admin", password=generate_password_hash("admin"), is_admin=True
+)
 new_services = Service(name="test123", url="http://google.com")
 
 with app.app_context():
