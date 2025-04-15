@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from application.dash.forms import RegisterForm
+from application.dash.forms import RegisterForm, ServiceForm
 from flask_login import login_required  # type: ignore
 from application.dash.models import Service
 from application.decorators import admin_required
@@ -27,3 +27,8 @@ def admin():
         check_admin = register_form.admin.data
 
     return render_template("admin.html", form=register_form)
+
+@dash_blueprint.route("/service", methods=["GET", "POST"])
+@login_required
+def service():
+    return render_template("add_service.html")

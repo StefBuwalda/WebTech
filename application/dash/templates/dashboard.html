@@ -6,8 +6,8 @@
 <div class="grid-container">
     {% for service in services%}
     <div class="container-xxl">
-        name: {{service["name"]}} <br>
-        url: {{service["url"]}}
+        Name: {{service["name"]}} <br>
+        URL: <a href="{{service}}">{{service["url"]}}</a>
     </div>
     {% endfor %}
     <div class="container-xxl">

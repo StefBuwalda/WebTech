@@ -28,7 +28,7 @@
                         <a class="nav-link active" aria-current="page" href="{{url_for('dash.index')}}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Info</a>
+                        <a class="nav-link" href="{{url_for('dash.service')}}">Add service</a>
                     </li>
                     {% if current_user.is_admin %}
                     <li class="nav-item">
