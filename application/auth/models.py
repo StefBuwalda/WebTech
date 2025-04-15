@@ -7,3 +7,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
+
+    def __init__(self, username: str, password: str, is_admin: bool = False):
+        self.username = username
+        self.password = password
+        self.is_admin = is_admin

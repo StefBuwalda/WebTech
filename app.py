@@ -1,6 +1,6 @@
 from application import app
 from flask import redirect, url_for
-from flask_login import current_user, login_required  # type: ignore
+from flask_login import login_required  # type: ignore
 
 
 # home route
