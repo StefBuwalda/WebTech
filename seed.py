@@ -15,7 +15,7 @@ new_user = User(username="admin", password=generate_password_hash("admin"))
 
 with app.app_context():
     # Remove all existing
-    Service.query.delete()
+    # Service.query.delete()
     User.query.delete()
     db.session.commit()
     # Then add new
