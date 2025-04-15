@@ -8,7 +8,7 @@ Login
 <form class="bg-body-tertiary" method="POST">
     {{ form.hidden_tag() }}
     {% if feedback %}
-    <p>{{feedback}}</p>
+    <p class="feedback">{{feedback}}</p>
     {% endif %}
     <div>
         {{ form.username.label }} <br> {{ form.username() }}
