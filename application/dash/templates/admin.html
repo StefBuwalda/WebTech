@@ -17,6 +17,12 @@ Register
     <div>
         {{ form.password.label }} <br> {{ form.password() }}
     </div>
+    <div>
+        Confirm {{ form.password.label }} <br> {{ form.password() }}
+    </div>
+    <div>
+        {{ form.admin }} {{ form.admin.label }}
+    </div>
     <div class="submit">
         {{ form.submit() }}
     </div>
