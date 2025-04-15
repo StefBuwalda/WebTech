@@ -12,13 +12,14 @@ new_strikers = [
 """
 
 new_user = User(username="admin", password=generate_password_hash("admin"))
+new_services = Service(name="test123", url="http://google.com")
 
 with app.app_context():
     # Remove all existing
-    # Service.query.delete()
+    Service.query.delete()
     User.query.delete()
     db.session.commit()
     # Then add new
-    # db.session.add_all(new_strikers)
+    db.session.add(new_services)
     db.session.add(new_user)
     db.session.commit()
