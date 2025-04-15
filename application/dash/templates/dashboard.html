@@ -5,9 +5,9 @@
 {%block content%}
 <div class="grid-container">
     {% for service in services%}
-    <div class="container-xxl">
+    <div onclick="location.href='{{service.url}}';" style="cursor: pointer;" class="container-xxl">
         Name: {{service["name"]}} <br>
-        URL: <a href="{{service}}">{{service["url"]}}</a>
+        URL: {{service["url"]}}
     </div>
     {% endfor %}
     <div class="container-xxl">
@@ -21,12 +21,6 @@
     </div>
     <div class="container-xxl">
         Item 4
-    </div>
-    <div class="container-xxl">
-        Item 5
-    </div>
-    <div class="container-xxl">
-        Item 6
     </div>
 </div>
 {%endblock%}

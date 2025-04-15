@@ -24,7 +24,16 @@ new_users = [
     ),
 ]
 
-new_services = Service(name="test123", url="http://google.com")
+new_services = [
+    Service(
+        name="test123",
+        url="http://google.com",
+    ),
+    Service(
+        name="Netflix",
+        url="https://www.netflix.com",
+    ),
+]
 
 with app.app_context():
     # Remove all existing
@@ -32,6 +41,6 @@ with app.app_context():
     User.query.delete()
     db.session.commit()
     # Then add new
-    db.session.add(new_services)
+    db.session.add_all(new_services)
     db.session.add_all(new_users)
     db.session.commit()

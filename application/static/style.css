@@ -17,6 +17,7 @@ body {
 .grid-container > div {
     text-align: center;
     height: fit-content;
+    width: 400px;
     padding-top: 5px;
     padding-bottom: 5px;
     border: 2px solid black;
