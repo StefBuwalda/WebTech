@@ -7,9 +7,6 @@ Register
 {% block content %}
 <form class="bg-body-tertiary" method="POST">
     {{ form.hidden_tag() }}
-    {% if feedback="User succesfully added" %}
-        <p class="succes">{{feedback}}</p>
-    {% endif %}
     {% if feedback %}
     <p class="feedback">{{feedback}}</p>
     {% endif %}
