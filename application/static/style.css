@@ -42,3 +42,8 @@ form {
 .submit {
     padding-top: 10px;
 }
+
+p {
+    font-size: 16px;
+    color: red;
+}

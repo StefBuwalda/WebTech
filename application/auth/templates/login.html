@@ -5,12 +5,11 @@ Login
 {% endblock %}
 
 {% block content %}
-{% if feedback %}
-<p>{{feedback}}</p>
-{% endif %}
-
 <form class="bg-body-tertiary" method="POST">
     {{ form.hidden_tag() }}
+    {% if feedback %}
+    <p>{{feedback}}</p>
+    {% endif %}
     <div>
         {{ form.username.label }} <br> {{ form.username() }}
     </div>

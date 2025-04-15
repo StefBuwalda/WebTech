@@ -27,7 +27,7 @@ def login():
             login_user(user)  # type: ignore
             return redirect("/")
         else:
-            feedback = "Foutieve login."
+            feedback = "Username or password is incorrect"
 
     return render_template("login.html", form=login_form, feedback=feedback)
 
