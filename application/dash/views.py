@@ -54,3 +54,13 @@ def service():
     return render_template(
         "add_service.html", form=service_form, active_page="service"
     )
+
+
+@dash_blueprint.route("/edit_service/<int:service_id>", methods=["POST"])
+@login_required
+def edit_service(service_id: int):
+    service = Service.query.get_or_404(service_id)
+    if current_user.id != service.user_id:
+        redirect(url_for("dash.index"))
+
+    return render_template("edit_service.html")
