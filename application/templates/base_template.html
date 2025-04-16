@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
         crossorigin="anonymous"></script>
     <title>{% block title %}{% endblock %}</title>
 </head>
+
 <body>
     <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
@@ -27,7 +29,7 @@
                     {% endif %}
                     {% if current_user.is_admin %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('dash.admin')}}">Add user</a>
+                        <a class="nav-link" href="{{url_for('auth.register')}}">Add user</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -40,4 +42,5 @@
     {% block content %}
     {% endblock %}
 </body>
+
 </html>
