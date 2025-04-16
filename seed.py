@@ -25,14 +25,8 @@ new_users = [
 ]
 
 new_services = [
-    Service(
-        name="test123",
-        url="http://google.com",
-    ),
-    Service(
-        name="Netflix",
-        url="https://www.netflix.com",
-    ),
+    Service(name="test123", url="http://google.com", user_id=1),
+    Service(name="Netflix", url="https://www.netflix.com", user_id=2),
 ]
 
 with app.app_context():

@@ -6,6 +6,9 @@ class Service(db.Model):
     name = db.Column(db.String, nullable=False)
     url = db.Column(db.String, nullable=False)
 
-    def __init__(self, name: str, url: str):
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+
+    def __init__(self, name: str, url: str, user_id: int):
         self.name = name
         self.url = url
+        self.user_id = user_id

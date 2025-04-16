@@ -8,6 +8,8 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
+    services = db.relationship("Service", backref="user", lazy="joined")
+
     def __init__(self, username: str, password: str, is_admin: bool = False):
         self.username = username
         self.password = password

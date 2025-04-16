@@ -1,7 +1,7 @@
 from application import db
 from flask import Blueprint, render_template
 from application.dash.forms import RegisterForm, ServiceForm
-from flask_login import login_required  # type: ignore
+from flask_login import login_required, current_user  # type: ignore
 from application.dash.models import Service
 from application.auth.models import User
 from application.decorators import admin_required
@@ -15,7 +15,7 @@ dash_blueprint = Blueprint("dash", __name__, template_folder="templates")
 @dash_blueprint.route("/", methods=["GET", "POST"])
 @login_required
 def index():
-    services = Service.query.all()  # type: ignore
+    services = current_user.services  # type: ignore
     return render_template("dashboard.html", services=services)
 
 
@@ -24,7 +24,7 @@ def index():
 def admin():
     register_form = RegisterForm()
 
-    if register_form.validate_on_submit():
+    if register_form.validate_on_submit():  # type: ignore
         username = register_form.username.data
         password = register_form.password.data
         confirm_password = register_form.confirm_password.data
@@ -55,6 +55,7 @@ def admin():
         )
     return render_template("admin.html", form=register_form)
 
+
 @dash_blueprint.route("/service", methods=["GET", "POST"])
 @login_required
 def service():
@@ -63,15 +64,12 @@ def service():
     if service_form.validate_on_submit():
         name = service_form.name.data
         url = service_form.url.data
-        new_service = Service(
-            name=name,
-            url=url,
-        )
+        new_service = Service(name=name, url=url, user_id=current_user.id)
         db.session.add(new_service)
         db.session.commit()
         return render_template(
             "add_service.html",
             form=ServiceForm(formdata=None),
-            feedback="Service succesfully added"
+            feedback="Service succesfully added",
         )
     return render_template("add_service.html", form=service_form)
