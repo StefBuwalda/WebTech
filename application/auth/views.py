@@ -3,10 +3,15 @@ from flask import Blueprint, render_template, redirect, url_for
 from application import db
 from application.auth.models import User
 from application.auth.forms import LoginForm
-from flask_login import login_required, login_user, logout_user  # type: ignore
+from flask_login import (  # type: ignore
+    login_required,  # type: ignore
+    login_user,  # type: ignore
+    logout_user,
+    current_user,
+)
 from werkzeug.security import check_password_hash, generate_password_hash
 from application.decorators import admin_required
-from application.auth.forms import RegisterForm
+from application.auth.forms import RegisterForm, UpdateForm
 
 auth_blueprint = Blueprint("auth", __name__, template_folder="templates")
 
@@ -27,12 +32,14 @@ def register():
                 "admin.html",
                 form=register_form,
                 feedback="Passwords don't match, please try again",
+                active_page="register",
             )
         if User.query.filter_by(username=username).first():
             return render_template(
                 "admin.html",
                 form=register_form,
                 feedback="Username is already taken",
+                active_page="register",
             )
         new_user = User(
             username=username,  # type: ignore
@@ -45,8 +52,41 @@ def register():
             "admin.html",
             form=RegisterForm(formdata=None),
             feedback="User succesfully added",
+            active_page="register",
         )
-    return render_template("admin.html", form=register_form)
+    return render_template(
+        "admin.html", form=register_form, active_page="register"
+    )
+
+
+@auth_blueprint.route("/update_user", methods=["GET", "POST"])
+@login_required
+def update():
+    form = UpdateForm(username=current_user.username)
+    if form.validate_on_submit():  # type: ignore
+        if not check_password_hash(
+            current_user.password, form.current_password.data  # type: ignore
+        ):
+            return render_template(
+                "update_user.html",
+                form=form,
+                feedback="Current password incorrect",
+                active_page="update",
+            )
+        if form.password.data != form.confirm_password.data:
+            return render_template(
+                "update_user.html",
+                form=form,
+                feedback="New password mismatched",
+                active_page="update",
+            )
+        current_user.password = generate_password_hash(
+            form.password.data  # type: ignore
+        )
+        db.session.commit()
+        logout_user()
+        return redirect(url_for("auth.login"))
+    return render_template("update_user.html", form=form, active_page="update")
 
 
 @auth_blueprint.route("/login", methods=["GET", "POST"])

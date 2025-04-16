@@ -6,14 +6,14 @@ from application.dash.models import Service
 
 dash_blueprint = Blueprint("dash", __name__, template_folder="templates")
 
-# Routes
-
 
 @dash_blueprint.route("/", methods=["GET", "POST"])
 @login_required
 def index():
     services = current_user.services  # type: ignore
-    return render_template("dashboard.html", services=services)
+    return render_template(
+        "dashboard.html", services=services, active_page="dashboard"
+    )
 
 
 @dash_blueprint.route("/delete_item/<int:service_id>", methods=["POST"])
@@ -49,5 +49,8 @@ def service():
             "add_service.html",
             form=ServiceForm(formdata=None),
             feedback="Service succesfully added",
+            active_page="service",
         )
-    return render_template("add_service.html", form=service_form)
+    return render_template(
+        "add_service.html", form=service_form, active_page="service"
+    )

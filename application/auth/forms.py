@@ -3,17 +3,27 @@ from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired
 
 
-class LoginForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired()])
-    password = PasswordField("Password")
-    submit = SubmitField("Login")
-
-
-class RegisterForm(FlaskForm):
+class defaultForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+
+class LoginForm(defaultForm):
+    pass
+
+
+class RegisterForm(defaultForm):
     confirm_password = PasswordField(
         "Confirm Password", validators=[DataRequired()]
     )
     is_admin = BooleanField("Admin")
-    submit = SubmitField("Add")
+
+
+class UpdateForm(defaultForm):
+    confirm_password = PasswordField(
+        "Confirm Password", validators=[DataRequired()]
+    )
+    current_password = PasswordField(
+        "Current Password", validators=[DataRequired()]
+    )

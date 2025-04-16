@@ -21,15 +21,22 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{url_for('dash.index')}}">Dashboard</a>
+                        <a class="nav-link {% if active_page == 'dashboard' %}active{% endif %}" aria-current=" page"
+                            href="{{url_for('dash.index')}}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('dash.service')}}">Add service</a>
+                        <a class="nav-link {% if active_page == 'service' %}active{% endif %}"
+                            href="{{url_for('dash.service')}}">Add service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if active_page == 'update' %}active{% endif %}"
+                            href="{{url_for('auth.update')}}">Update password</a>
                     </li>
                     {% endif %}
                     {% if current_user.is_admin %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('auth.register')}}">Add user</a>
+                        <a class="nav-link {% if active_page == 'register' %}active{% endif %}"
+                            href="{{url_for('auth.register')}}">Add user</a>
                     </li>
                     {% endif %}
                 </ul>
