@@ -35,16 +35,16 @@ Register
     <div>
         {{ form.username.label }} <br> {{ form.username() }}
     </div>
-    <div>
+    <div class="padding">
         {{ form.password.label }} <br> {{ form.password() }}
     </div>
-    <div>
+    <div class="padding">
         {{ form.confirm_password.label }} <br> {{ form.confirm_password() }}
     </div>
-    <div>
+    <div class="padding">
         {{ form.is_admin() }} {{ form.is_admin.label }}
     </div>
-    <div class="submit">
+    <div class="padding">
         {{ form.submit() }}
     </div>
 </form>

@@ -41,13 +41,16 @@ Add service
     <div>
         {{ form.name.label }} <br> {{ form.name() }}
     </div>
-    <div>
+    <div class="padding">
         {{ form.url.label }} <br> {{ form.url() }}
     </div>
-    <div>
+    <div class="padding">
+        Upload an icon:
+    </div>
+    <div class="padding">
         {{ form.image() }}
     </div>
-    <div class="submit">
+    <div class="padding">
         {{ form.submit() }}
     </div>
 </form>
