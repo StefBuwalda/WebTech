@@ -1,7 +1,5 @@
 # How to install
-
 ## Setting up your virtual environment
-
 ### Creating virtual environment
 python -m venv venv
 
@@ -12,7 +10,6 @@ python -m venv venv
 pip install -r requirements.txt
 
 ## Setting up the database
-
 ### Initialize database
 flask --app app.py db init
 
