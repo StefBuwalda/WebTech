@@ -2,12 +2,17 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager  # type: ignore
+import os
 
 # App Config
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///services.sqlite"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False  # Wat is dit?
 app.config["SECRET_KEY"] = "bvjchsygvduycgsyugc"  # Andere secret key
+app.config["UPLOAD_FOLDER"] = r"application\static\icons"
+
+# Ensure the upload folder exists
+os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)  # type: ignore
 
 # Object Relational Management
 db = SQLAlchemy()

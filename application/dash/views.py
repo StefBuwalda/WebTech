@@ -3,6 +3,9 @@ from flask import Blueprint, render_template, redirect, url_for
 from application.dash.forms import ServiceForm
 from flask_login import login_required, current_user  # type: ignore
 from application.dash.models import Service
+import os
+from application import app
+from werkzeug.utils import secure_filename
 
 dash_blueprint = Blueprint("dash", __name__, template_folder="templates")
 
@@ -36,12 +39,20 @@ def service():
     service_form = ServiceForm()
 
     if service_form.validate_on_submit():  # type: ignore
+        image = service_form.image.data
         name = service_form.name.data
         url = service_form.url.data
+        filename = secure_filename(image.filename)
+        save_path = os.path.join(
+            app.config["UPLOAD_FOLDER"], filename  # type: ignore
+        )
+        image.save(save_path)  # type: ignore
+
         new_service = Service(
             name=name,  # type: ignore
             url=url,  # type: ignore
             user_id=current_user.id,
+            icon=filename,  # type: ignore
         )
         db.session.add(new_service)
         db.session.commit()

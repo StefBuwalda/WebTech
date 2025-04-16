@@ -8,8 +8,7 @@
     <div class="bg-light container-xxl">
         <div class="row row-cols-3">
             <div class="col-sm-2" onclick="location.href='{{service.url}}';" style="cursor: pointer;">
-                <img class="fit-picture"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png">
+                <img class="fit-picture" src="{{ url_for('static', filename='icons/'+service['icon'])}}">
             </div>
             <div class="col-sm-10">
                 <div class="row">
