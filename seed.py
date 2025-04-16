@@ -18,9 +18,9 @@ new_users = [
         is_admin=True,
     ),
     User(
-        username="test",
-        password=generate_password_hash("test123"),
-        is_admin=False,
+        username="Daan",
+        password=generate_password_hash("pass"),
+        is_admin=True,
     ),
     User(
         username="stef",
@@ -31,6 +31,8 @@ new_users = [
 
 new_services = [
     Service(name="test123", url="http://google.com", user_id=1),
+    # Daan services
+    Service(name="Google", url="https://google.com", user_id=2),
     Service(name="Netflix", url="https://www.netflix.com", user_id=2),
     # Stef services
     Service(name="Plex", url="https://plex.local", user_id=3),
