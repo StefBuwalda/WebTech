@@ -42,6 +42,7 @@
                         Profile
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuButton1">
+                        <li class="dropdown-item">Username: {{current_user.username}} </li>
                         <li><a class="dropdown-item {% if active_page == 'update' %}active{% endif %}" href="{{url_for('auth.update')}}">Update password</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" style="color: tomato;" data-bs-theme="dark" href="{{url_for('auth.logout')}}">Logout</a></li>
