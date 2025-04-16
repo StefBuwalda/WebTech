@@ -15,7 +15,6 @@ body {
 }
 
 .grid-container > div {
-    text-align: center;
     height: fit-content;
     width: 400px;
     padding-top: 5px;
@@ -24,8 +23,10 @@ body {
     border-radius: 10px;
 }
 
-.dots {
-    margin-left: 90%;
+.fit-picture {
+    width: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 /* Login page */
