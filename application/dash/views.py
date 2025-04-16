@@ -3,9 +3,7 @@ from flask import Blueprint, render_template, redirect, url_for
 from application.dash.forms import ServiceForm
 from flask_login import login_required, current_user  # type: ignore
 from application.dash.models import Service
-import os
-from application import app
-from werkzeug.utils import secure_filename
+from application.utils import saveImage
 
 dash_blueprint = Blueprint("dash", __name__, template_folder="templates")
 
@@ -44,15 +42,7 @@ def service():
         url = service_form.url.data
         filename2 = "google.png"
         if image:
-            filename = secure_filename(image.filename)
-            save_path = os.path.join(
-                app.config["UPLOAD_FOLDER"],  # type: ignore
-                str(current_user.id),
-                filename,
-            )
-            os.makedirs(os.path.dirname(save_path), exist_ok=True)
-            image.save(save_path)  # type: ignore
-            filename2 = str(current_user.id) + "/" + filename
+            filename2 = saveImage(image)
 
         new_service = Service(
             name=name,  # type: ignore
@@ -85,14 +75,35 @@ def edit_service(service_id: int):
 
     # Correcte gebruiker
     form = ServiceForm()
-    print("test")
     if form.validate_on_submit():  # type: ignore
-        print("test2")
-        if service.name != form.name.data or service.url != form.url.data:
+        commit = False
+        if service.name != form.name.data:
             service.name = form.name.data
+            commit = True
+        if service.url != form.url.data:
             service.url = form.url.data
+            commit = True
+        if form.image.data:
+            service.icon = saveImage(form.image.data)
+            commit = True
+        if commit:
             db.session.commit()
         return redirect(url_for("dash.index"))
     # Fill in correct data
     form = ServiceForm(name=service.name, url=service.url)
     return render_template("edit_service.html", form=form)
+
+
+"""
+def saveImage(image: ...):
+    filename = secure_filename(image.filename)
+    save_path = os.path.join(
+        app.config["UPLOAD_FOLDER"],  # type: ignore
+        str(current_user.id),
+        filename,
+    )
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+    image.save(save_path)  # type: ignore
+    filename2 = str(current_user.id) + "/" + filename
+    return filename2
+"""

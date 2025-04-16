@@ -5,7 +5,7 @@ Edit service
 {% endblock %}
 
 {% block content %}
-<form class="form bg-body-tertiary" method="POST">
+<form class="form bg-body-tertiary" method="POST" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <div>
         {{ form.name.label }} <br> {{ form.name() }}
