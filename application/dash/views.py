@@ -55,8 +55,8 @@ def service():
             name=name,  # type: ignore
             url=url,  # type: ignore
             user_id=current_user.id,
-            icon=os.path.join(str(current_user.id), filename),  # type: ignore
-        )
+            icon=str(current_user.id) + "/" + filename,
+        )  # type: ignore
         db.session.add(new_service)
         db.session.commit()
         return render_template(
