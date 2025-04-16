@@ -16,7 +16,7 @@
 <body>
     <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{url_for('index')}}">Applicatie naam</a>
+            <a class="navbar-brand" href="{{url_for('index')}}">ServiceHUB</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if current_user.is_authenticated %}
@@ -28,10 +28,6 @@
                         <a class="nav-link {% if active_page == 'service' %}active{% endif %}"
                             href="{{url_for('dash.service')}}">Add service</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if active_page == 'update' %}active{% endif %}"
-                            href="{{url_for('auth.update')}}">Update password</a>
-                    </li>
                     {% endif %}
                     {% if current_user.is_admin %}
                     <li class="nav-item">
@@ -41,7 +37,16 @@
                     {% endif %}
                 </ul>
                 {% if current_user.is_authenticated %}
-                <a class="btn btn-outline-info" data-bs-theme="dark" href="{{url_for('auth.logout')}}">Logout</a>
+                <div class="dropstart">
+                    <button class="btn btn-outline-info" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Profile
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item {% if active_page == 'update' %}active{% endif %}" href="{{url_for('auth.update')}}">Update password</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" style="color: tomato;" data-bs-theme="dark" href="{{url_for('auth.logout')}}">Logout</a></li>
+                    </ul>
+                </div>
                 {% endif %}
             </div>
         </div>
