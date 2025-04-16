@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for
 
 # from application import db
 from application.auth.models import User
@@ -36,5 +36,4 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash("Je bent nu uitgelogd.")
     return redirect(url_for("index"))

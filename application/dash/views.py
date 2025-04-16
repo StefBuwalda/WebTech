@@ -42,8 +42,8 @@ def admin():
                 feedback="Username is already taken",
             )
         new_user = User(
-            username=username,
-            password=generate_password_hash(password),
+            username=username,  # type: ignore
+            password=generate_password_hash(password),  # type: ignore
             is_admin=is_admin,
         )
         db.session.add(new_user)
@@ -61,10 +61,14 @@ def admin():
 def service():
     service_form = ServiceForm()
 
-    if service_form.validate_on_submit():
+    if service_form.validate_on_submit():  # type: ignore
         name = service_form.name.data
         url = service_form.url.data
-        new_service = Service(name=name, url=url, user_id=current_user.id)
+        new_service = Service(
+            name=name,  # type: ignore
+            url=url,  # type: ignore
+            user_id=current_user.id,
+        )
         db.session.add(new_service)
         db.session.commit()
         return render_template(
