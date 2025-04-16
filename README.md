@@ -12,7 +12,7 @@ python -m venv venv
 ### 2. Activate the Virtual Environment
 For Windows, activate the virtual environment with:
 ```bash
-.env\Scriptsctivate.bat
+.\venv\Scripts\activate.bat
 ```
 
 ### 3. Install Required Packages
