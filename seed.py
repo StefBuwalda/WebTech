@@ -22,11 +22,23 @@ new_users = [
         password=generate_password_hash("test123"),
         is_admin=False,
     ),
+    User(
+        username="stef",
+        password=generate_password_hash("stef123"),
+        is_admin=False,
+    ),
 ]
 
 new_services = [
     Service(name="test123", url="http://google.com", user_id=1),
     Service(name="Netflix", url="https://www.netflix.com", user_id=2),
+    # Stef services
+    Service(name="Plex", url="https://plex.local", user_id=3),
+    Service(name="TrueNAS", url="https://truenas.local", user_id=3),
+    Service(name="Transmission", url="https://transmission.local", user_id=3),
+    Service(name="Tautulli", url="https://tautulli.local", user_id=3),
+    Service(name="Overseerr", url="https://overseerr.local", user_id=3),
+    Service(name="Plex", url="https://plex.local", user_id=3),
 ]
 
 with app.app_context():

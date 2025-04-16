@@ -5,9 +5,14 @@
 {%block content%}
 <div class="grid-container">
     {% for service in services%}
-    <div onclick="location.href='{{service.url}}';" style="cursor: pointer;" class="container-xxl">
-        Name: {{service["name"]}} <br>
-        URL: {{service["url"]}}
+    <div>
+        <form action="{{ url_for('dash.delete_item', service_id=service.id) }}" method="POST" style="display:inline;">
+            <button class="delete-btn" type="submit">×</button>
+        </form>
+        <div onclick="location.href='{{service.url}}';" style="cursor: pointer;" class="container-xxl">
+            Name: {{service["name"]}} <br>
+            URL: {{service["url"]}}
+        </div>
     </div>
     {% endfor %}
 </div>

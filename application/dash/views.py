@@ -1,5 +1,5 @@
 from application import db
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for
 from application.dash.forms import RegisterForm, ServiceForm
 from flask_login import login_required, current_user  # type: ignore
 from application.dash.models import Service
@@ -54,6 +54,20 @@ def admin():
             feedback="User succesfully added",
         )
     return render_template("admin.html", form=register_form)
+
+
+@dash_blueprint.route("/delete_item/<int:service_id>", methods=["POST"])
+@login_required
+def delete_item(service_id: int):
+    service = Service.query.get_or_404(service_id)
+
+    # Check ownership
+    if service.user_id != current_user.id:
+        return redirect(url_for("dash.index"))
+
+    db.session.delete(service)
+    db.session.commit()
+    return redirect(url_for("dash.index"))
 
 
 @dash_blueprint.route("/service", methods=["GET", "POST"])
