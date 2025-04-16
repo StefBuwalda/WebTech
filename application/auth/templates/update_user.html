@@ -1,0 +1,26 @@
+{% extends 'base_template.html' %}
+
+{% block title %}
+Update
+{% endblock %}
+
+{% block content %}
+<form class="form bg-body-tertiary" method="POST">
+    {{ form.hidden_tag() }}
+    {% if feedback %}
+    <p class="feedback">{{feedback}}</p>
+    {% endif %}
+    <div>
+        Current password <br> {{ form.current_password() }}
+    </div>
+    <div class="padding">
+        New password <br> {{ form.password() }}
+    </div>
+    <div class="padding">
+        Confirm new password <br> {{ form.confirm_password() }}
+    </div>
+    <div class="padding">
+        {{ form.submit() }}
+    </div>
+</form>
+{% endblock %}

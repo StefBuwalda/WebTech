@@ -1,0 +1,26 @@
+{% extends 'base_template.html' %}
+
+{% block title %}
+Edit service
+{% endblock %}
+
+{% block content %}
+<form class="form bg-body-tertiary" method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.name.label }} <br> {{ form.name() }}
+    </div>
+    <div>
+        {{ form.url.label }} <br> {{ form.url() }}
+    </div>
+    <div class="padding">
+        Upload an icon:
+    </div>
+    <div class="padding">
+        {{ form.image() }}
+    </div>
+    <div class="padding">
+        {{ form.submit(value="Edit") }}
+    </div>
+</form>
+{% endblock %}
