@@ -5,7 +5,7 @@ class Service(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     url = db.Column(db.String, nullable=False)
-    icon = db.Column(db.String, nullable=False, default="google.png")
+    icon = db.Column(db.String, default="google.png")
 
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 

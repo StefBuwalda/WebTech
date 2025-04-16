@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm  # type: ignore
 from wtforms import StringField, SubmitField, URLField
 from wtforms.validators import DataRequired
-from flask_wtf.file import FileField, FileAllowed, FileRequired  # type: ignore
+from flask_wtf.file import FileField, FileAllowed  # type: ignore
 
 
 class ServiceForm(FlaskForm):
@@ -10,7 +10,6 @@ class ServiceForm(FlaskForm):
     image = FileField(
         "Icon:",
         validators=[
-            FileRequired(),
             FileAllowed(["jpg", "jpeg", "png"], "Unsupported file format"),
         ],
     )

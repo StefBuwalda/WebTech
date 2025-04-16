@@ -42,20 +42,23 @@ def service():
         image = service_form.image.data
         name = service_form.name.data
         url = service_form.url.data
-        filename = secure_filename(image.filename)
-        save_path = os.path.join(
-            app.config["UPLOAD_FOLDER"],  # type: ignore
-            str(current_user.id),
-            filename,
-        )
-        os.makedirs(os.path.dirname(save_path), exist_ok=True)
-        image.save(save_path)  # type: ignore
+        filename2 = "google.png"
+        if image:
+            filename = secure_filename(image.filename)
+            save_path = os.path.join(
+                app.config["UPLOAD_FOLDER"],  # type: ignore
+                str(current_user.id),
+                filename,
+            )
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+            image.save(save_path)  # type: ignore
+            filename2 = str(current_user.id) + "/" + filename
 
         new_service = Service(
             name=name,  # type: ignore
             url=url,  # type: ignore
             user_id=current_user.id,
-            icon=str(current_user.id) + "/" + filename,
+            icon=filename2,
         )  # type: ignore
         db.session.add(new_service)
         db.session.commit()
@@ -82,7 +85,9 @@ def edit_service(service_id: int):
 
     # Correcte gebruiker
     form = ServiceForm()
+    print("test")
     if form.validate_on_submit():  # type: ignore
+        print("test2")
         if service.name != form.name.data or service.url != form.url.data:
             service.name = form.name.data
             service.url = form.url.data
