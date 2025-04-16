@@ -13,14 +13,13 @@ Update
     <div>
         Current password <br> {{ form.current_password() }}
     </div>
-    <div>
+    <div class="padding">
         New password <br> {{ form.password() }}
     </div>
-    <div>
+    <div class="padding">
         Confirm new password <br> {{ form.confirm_password() }}
     </div>
-
-    <div class="submit">
+    <div class="padding">
         {{ form.submit() }}
     </div>
 </form>
