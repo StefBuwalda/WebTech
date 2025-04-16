@@ -19,6 +19,15 @@ flask --app app.py db migrate
 ### upgrade database
 flask --app app.py db upgrade
 
+## Seeding the database
+Run seed.py to seed the database with a few users and services
+
+## Starting application
+Run app.py to run the application
+
+
+
+
 # Development commands
 #### Updating requirements.txt
 pip freeze > requirements.txt
