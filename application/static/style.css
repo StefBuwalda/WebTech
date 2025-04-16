@@ -14,7 +14,7 @@ body {
     margin-right: 10%;
 }
 
-.grid-container > div {
+.grid-container > #item {
     text-align: center;
     height: fit-content;
     width: 400px;
@@ -47,9 +47,4 @@ form {
 .feedback {
     font-size: 16px;
     color: red;
-}
-
-.succes {
-    font-size: 16px;
-    color: green;
 }
