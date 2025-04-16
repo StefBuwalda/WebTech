@@ -56,11 +56,24 @@ def service():
     )
 
 
-@dash_blueprint.route("/edit_service/<int:service_id>", methods=["POST"])
+@dash_blueprint.route(
+    "/edit_service/<int:service_id>", methods=["GET", "POST"]
+)
 @login_required
 def edit_service(service_id: int):
     service = Service.query.get_or_404(service_id)
+
     if current_user.id != service.user_id:
         redirect(url_for("dash.index"))
 
-    return render_template("edit_service.html")
+    # Correcte gebruiker
+    form = ServiceForm()
+    if form.validate_on_submit():  # type: ignore
+        if service.name != form.name.data or service.url != form.url.data:
+            service.name = form.name.data
+            service.url = form.url.data
+            db.session.commit()
+        return redirect(url_for("dash.index"))
+    # Fill in correct data
+    form = ServiceForm(name=service.name, url=service.url)
+    return render_template("edit_service.html", form=form)
