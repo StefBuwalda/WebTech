@@ -22,11 +22,10 @@ body {
     padding-bottom: 5px;
     border: 2px solid black;
     border-radius: 10px;
-    background-color: whitesmoke;
 }
 
-button {
-    
+.dots {
+    margin-left: 90%;
 }
 
 /* Login page */
