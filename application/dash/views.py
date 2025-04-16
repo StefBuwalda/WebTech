@@ -44,15 +44,18 @@ def service():
         url = service_form.url.data
         filename = secure_filename(image.filename)
         save_path = os.path.join(
-            app.config["UPLOAD_FOLDER"], filename  # type: ignore
+            app.config["UPLOAD_FOLDER"],  # type: ignore
+            str(current_user.id),
+            filename,
         )
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
         image.save(save_path)  # type: ignore
 
         new_service = Service(
             name=name,  # type: ignore
             url=url,  # type: ignore
             user_id=current_user.id,
-            icon=filename,  # type: ignore
+            icon=os.path.join(str(current_user.id), filename),  # type: ignore
         )
         db.session.add(new_service)
         db.session.commit()
