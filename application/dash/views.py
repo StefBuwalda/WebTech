@@ -35,7 +35,7 @@ def delete_service(service_id: int):
 
 
 # Add a service
-@dash_blueprint.route("/service", methods=["GET", "POST"])
+@dash_blueprint.route("/add_service", methods=["GET", "POST"])
 @login_required
 def add_service():
     service_form = ServiceForm()
