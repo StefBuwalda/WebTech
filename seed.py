@@ -3,14 +3,7 @@ from application.dash.models import Service
 from application.auth.models import User
 from werkzeug.security import generate_password_hash
 
-"""
-new_strikers = [
-    se(name="Erik", strike="y", age=44),
-    Striker(name="Henk", strike="n", age=88),
-]
-
-"""
-
+# User acounts to add
 new_users = [
     User(
         username="admin",
@@ -29,6 +22,7 @@ new_users = [
     ),
 ]
 
+# Services to add
 new_services = [
     Service(name="test123", url="http://google.com", user_id=1),
     # Daan services
@@ -51,4 +45,5 @@ with app.app_context():
     # Then add new
     db.session.add_all(new_services)
     db.session.add_all(new_users)
+    # Commit
     db.session.commit()
