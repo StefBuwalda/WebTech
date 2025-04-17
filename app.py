@@ -1,11 +1,9 @@
 from application import app
 from flask import redirect, url_for
-from flask_login import login_required  # type: ignore
 
 
-# home route
+# home route, place holder in case we want a home page
 @app.route("/")
-@login_required
 def index():
     return redirect(url_for("dash.index"))
 

@@ -9,7 +9,7 @@ python -m venv venv
 ### Installing required packages
 pip install -r requirements.txt
 
-## Setting up the database
+## Setting up the database (in venv)
 ### Initialize database
 flask --app app.py db init
 
