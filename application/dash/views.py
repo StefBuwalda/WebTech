@@ -5,9 +5,11 @@ from flask_login import login_required, current_user  # type: ignore
 from application.dash.models import Service
 from application.utils import saveImage
 
+# Dashboard blueprint
 dash_blueprint = Blueprint("dash", __name__, template_folder="templates")
 
 
+# index
 @dash_blueprint.route("/", methods=["GET", "POST"])
 @login_required
 def index():
@@ -17,9 +19,10 @@ def index():
     )
 
 
-@dash_blueprint.route("/delete_item/<int:service_id>", methods=["POST"])
+# Deleting a service
+@dash_blueprint.route("/delete_service/<int:service_id>", methods=["POST"])
 @login_required
-def delete_item(service_id: int):
+def delete_service(service_id: int):
     service = Service.query.get_or_404(service_id)
 
     # Check ownership
@@ -31,9 +34,10 @@ def delete_item(service_id: int):
     return redirect(url_for("dash.index"))
 
 
+# Add a service
 @dash_blueprint.route("/service", methods=["GET", "POST"])
 @login_required
-def service():
+def add_service():
     service_form = ServiceForm()
 
     if service_form.validate_on_submit():  # type: ignore
@@ -63,6 +67,7 @@ def service():
     )
 
 
+# Edit service
 @dash_blueprint.route(
     "/edit_service/<int:service_id>", methods=["GET", "POST"]
 )
@@ -92,18 +97,3 @@ def edit_service(service_id: int):
     # Fill in correct data
     form = ServiceForm(name=service.name, url=service.url)
     return render_template("edit_service.html", form=form)
-
-
-"""
-def saveImage(image: ...):
-    filename = secure_filename(image.filename)
-    save_path = os.path.join(
-        app.config["UPLOAD_FOLDER"],  # type: ignore
-        str(current_user.id),
-        filename,
-    )
-    os.makedirs(os.path.dirname(save_path), exist_ok=True)
-    image.save(save_path)  # type: ignore
-    filename2 = str(current_user.id) + "/" + filename
-    return filename2
-"""
