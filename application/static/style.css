@@ -5,7 +5,7 @@ body {
 
 /* Dashboard page */
 .grid-container {
-    display: flex;
+    display: grid;
     grid-template-columns: auto auto auto auto auto;
     gap: 20px;
     background-color: lightslategray;
