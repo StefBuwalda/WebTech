@@ -1,5 +1,5 @@
 from application import db
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, flash
 from application.dash.forms import ServiceForm
 from flask_login import current_user  # type: ignore
 from application.dash.models import Service
@@ -28,10 +28,12 @@ def delete_service(service_id: int):
 
     # Check ownership
     if service.user_id != current_user.id:
+        flash("This is not your service!")
         return redirect(url_for("dash.index"))
 
     db.session.delete(service)
     db.session.commit()
+    flash("Service deleted")
     return redirect(url_for("dash.index"))
 
 
@@ -57,12 +59,8 @@ def add_service():
         )  # type: ignore
         db.session.add(new_service)
         db.session.commit()
-        return render_template(
-            "add_service.html",
-            form=ServiceForm(formdata=None),
-            feedback="Service succesfully added",
-            active_page="service",
-        )
+        flash("Service added")
+        return redirect(url_for("dash.index"))
     return render_template(
         "add_service.html", form=service_form, active_page="service"
     )
@@ -94,7 +92,8 @@ def edit_service(service_id: int):
             commit = True
         if commit:
             db.session.commit()
-        return redirect(url_for("dash.index"))
+            flash("Service edited")
+            return redirect(url_for("dash.index"))
     # Fill in correct data
     form = ServiceForm(name=service.name, url=service.url)
     return render_template("edit_service.html", form=form)

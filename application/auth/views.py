@@ -85,6 +85,7 @@ def update():
         )
         db.session.commit()
         logout_user()
+        flash("Password changed succesfully, please log back in")
         return redirect(url_for("auth.login"))
     return render_template("update_user.html", form=form, active_page="update")
 
@@ -104,6 +105,7 @@ def login():
             user.password, password  # type: ignore
         ):
             login_user(user)  # type: ignore
+            flash("Logged in succesfully")
             return redirect("/")
         else:
             feedback = "Username or password is incorrect"
