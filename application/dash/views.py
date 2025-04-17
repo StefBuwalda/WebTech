@@ -1,9 +1,10 @@
 from application import db
 from flask import Blueprint, render_template, redirect, url_for
 from application.dash.forms import ServiceForm
-from flask_login import login_required, current_user  # type: ignore
+from flask_login import current_user  # type: ignore
 from application.dash.models import Service
 from application.utils import saveImage
+from application.decorators import login_required
 
 # Dashboard blueprint
 dash_blueprint = Blueprint("dash", __name__, template_folder="templates")
