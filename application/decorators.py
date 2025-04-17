@@ -4,6 +4,9 @@ from functools import wraps
 from flask import redirect, url_for
 
 
+# Decorator that checks if the current user is logged in and an admin
+# Could be shortened by adding the login_required decorator
+# and removing the logic here
 def admin_required(f: Callable[..., Any]) -> Callable[..., Any]:
     @wraps(f)
     def decorated_function(*args: ..., **kwargs: ...):
