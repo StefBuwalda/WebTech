@@ -5,43 +5,32 @@ body {
 
 /* Dashboard page */
 .grid-container {
-    display: flex;
-    grid-template-columns: auto auto auto auto auto;
+    display: grid;
+    grid-template-columns: auto auto auto;
     gap: 20px;
     background-color: lightslategray;
     padding-top: 20px;
     margin-left: 10%;
     margin-right: 10%;
-    justify-content: center;
 }
 
 .grid-container > div {
     height: fit-content;
-    width: 200px;
+    width: 400px;
     padding-top: 5px;
     padding-bottom: 5px;
     border: 2px solid black;
     border-radius: 10px;
     box-shadow: 5px 5px 10px black;
-    font-weight: bold;
-    
 }
 
 .fit-picture {
-    width: 175px;
+    width: 45px;
     margin-top: 5px;
     margin-bottom: 5px;
     border: 1px solid black;
     border-radius: 5px;
     box-shadow: 0px 0px 5px black;
-}
-
-.url {
-    font-weight: normal;
-}
-
-.name {
-    margin-left: 60px;
 }
 
 /* Login page */
