@@ -1,13 +1,16 @@
 from application import db
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, flash
 from application.dash.forms import ServiceForm
-from flask_login import login_required, current_user  # type: ignore
+from flask_login import current_user  # type: ignore
 from application.dash.models import Service
 from application.utils import saveImage
+from application.decorators import login_required
 
+# Dashboard blueprint
 dash_blueprint = Blueprint("dash", __name__, template_folder="templates")
 
 
+# index
 @dash_blueprint.route("/", methods=["GET", "POST"])
 @login_required
 def index():
@@ -17,23 +20,27 @@ def index():
     )
 
 
-@dash_blueprint.route("/delete_item/<int:service_id>", methods=["POST"])
+# Deleting a service
+@dash_blueprint.route("/delete_service/<int:service_id>", methods=["POST"])
 @login_required
-def delete_item(service_id: int):
+def delete_service(service_id: int):
     service = Service.query.get_or_404(service_id)
 
     # Check ownership
     if service.user_id != current_user.id:
+        flash("This is not your service!")
         return redirect(url_for("dash.index"))
 
     db.session.delete(service)
     db.session.commit()
+    flash("Service deleted")
     return redirect(url_for("dash.index"))
 
 
-@dash_blueprint.route("/service", methods=["GET", "POST"])
+# Add a service
+@dash_blueprint.route("/add_service", methods=["GET", "POST"])
 @login_required
-def service():
+def add_service():
     service_form = ServiceForm()
 
     if service_form.validate_on_submit():  # type: ignore
@@ -52,17 +59,14 @@ def service():
         )  # type: ignore
         db.session.add(new_service)
         db.session.commit()
-        return render_template(
-            "add_service.html",
-            form=ServiceForm(formdata=None),
-            feedback="Service succesfully added",
-            active_page="service",
-        )
+        flash("Service added")
+        return redirect(url_for("dash.index"))
     return render_template(
         "add_service.html", form=service_form, active_page="service"
     )
 
 
+# Edit service
 @dash_blueprint.route(
     "/edit_service/<int:service_id>", methods=["GET", "POST"]
 )
@@ -88,22 +92,8 @@ def edit_service(service_id: int):
             commit = True
         if commit:
             db.session.commit()
-        return redirect(url_for("dash.index"))
+            flash("Service edited")
+            return redirect(url_for("dash.index"))
     # Fill in correct data
     form = ServiceForm(name=service.name, url=service.url)
     return render_template("edit_service.html", form=form)
-
-
-"""
-def saveImage(image: ...):
-    filename = secure_filename(image.filename)
-    save_path = os.path.join(
-        app.config["UPLOAD_FOLDER"],  # type: ignore
-        str(current_user.id),
-        filename,
-    )
-    os.makedirs(os.path.dirname(save_path), exist_ok=True)
-    image.save(save_path)  # type: ignore
-    filename2 = str(current_user.id) + "/" + filename
-    return filename2
-"""
