@@ -29,14 +29,14 @@ def register():
         is_admin = register_form.is_admin.data
         if confirm_password != password:
             return render_template(
-                "admin.html",
+                "register_user.html",
                 form=register_form,
                 feedback="Passwords don't match, please try again",
                 active_page="register",
             )
         if User.query.filter_by(username=username).first():
             return render_template(
-                "admin.html",
+                "register_user.html",
                 form=register_form,
                 feedback="Username is already taken",
                 active_page="register",
@@ -49,13 +49,13 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         return render_template(
-            "admin.html",
+            "register_user.html",
             form=RegisterForm(formdata=None),
             feedback="User succesfully added",
             active_page="register",
         )
     return render_template(
-        "admin.html", form=register_form, active_page="register"
+        "register_user.html", form=register_form, active_page="register"
     )
 
 
