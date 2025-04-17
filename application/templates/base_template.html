@@ -38,20 +38,46 @@
                 </ul>
                 {% if current_user.is_authenticated %}
                 <div class="dropstart">
-                    <button class="btn btn-outline-info" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-outline-info" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         Profile
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuButton1">
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start"
+                        aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item">Username: {{current_user.username}}</a></li>
-                        <li><a class="dropdown-item {% if active_page == 'update' %}active{% endif %}" href="{{url_for('auth.update')}}">Change password</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" style="color: tomato;" data-bs-theme="dark" href="{{url_for('auth.logout')}}">Logout</a></li>
+                        <li><a class="dropdown-item {% if active_page == 'update' %}active{% endif %}"
+                                href="{{url_for('auth.update')}}">Change password</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" style="color: tomato;" data-bs-theme="dark"
+                                href="{{url_for('auth.logout')}}">Logout</a></li>
                     </ul>
                 </div>
                 {% endif %}
             </div>
         </div>
     </nav>
+
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+        <symbol id="check-circle-fill" viewBox="0 0 16 16">
+            <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+        </symbol>
+    </svg>
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1050;">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Success:">
+                <use xlink:href="#check-circle-fill" />
+            </svg>
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+
     {% block content %}
     {% endblock %}
 </body>

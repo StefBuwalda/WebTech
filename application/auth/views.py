@@ -1,16 +1,15 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, flash
 
 from application import db
 from application.auth.models import User
 from application.auth.forms import LoginForm
 from flask_login import (  # type: ignore
-    login_required,  # type: ignore
     login_user,  # type: ignore
     logout_user,
     current_user,
 )
 from werkzeug.security import check_password_hash, generate_password_hash
-from application.decorators import admin_required
+from application.decorators import admin_required, login_required
 from application.auth.forms import RegisterForm, UpdateForm
 
 auth_blueprint = Blueprint("auth", __name__, template_folder="templates")
@@ -86,6 +85,7 @@ def update():
         )
         db.session.commit()
         logout_user()
+        flash("Password changed succesfully, please log back in")
         return redirect(url_for("auth.login"))
     return render_template("update_user.html", form=form, active_page="update")
 
@@ -105,6 +105,7 @@ def login():
             user.password, password  # type: ignore
         ):
             login_user(user)  # type: ignore
+            flash("Logged in succesfully")
             return redirect("/")
         else:
             feedback = "Username or password is incorrect"
@@ -117,4 +118,5 @@ def login():
 @login_required
 def logout():
     logout_user()
+    flash("Logged out succesfully")
     return redirect(url_for("index"))
