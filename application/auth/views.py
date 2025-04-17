@@ -16,8 +16,8 @@ from application.auth.forms import RegisterForm, UpdateForm
 auth_blueprint = Blueprint("auth", __name__, template_folder="templates")
 
 
-# Routes
-@auth_blueprint.route("/register", methods=["GET", "POST"])
+# Add user
+@auth_blueprint.route("/register_user", methods=["GET", "POST"])
 @admin_required
 def register():
     register_form = RegisterForm()
@@ -59,6 +59,7 @@ def register():
     )
 
 
+# Update user (specifically password)
 @auth_blueprint.route("/update_user", methods=["GET", "POST"])
 @login_required
 def update():
@@ -89,6 +90,7 @@ def update():
     return render_template("update_user.html", form=form, active_page="update")
 
 
+# Login as user or admin
 @auth_blueprint.route("/login", methods=["GET", "POST"])
 def login():
     login_form = LoginForm()
@@ -110,6 +112,7 @@ def login():
     return render_template("login.html", form=login_form, feedback=feedback)
 
 
+# Logout
 @auth_blueprint.route("/logout")
 @login_required
 def logout():
