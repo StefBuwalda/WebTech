@@ -21,12 +21,16 @@ body {
     padding-bottom: 5px;
     border: 2px solid black;
     border-radius: 10px;
+    box-shadow: 5px 5px 10px black;
 }
 
 .fit-picture {
     width: 45px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px black;
 }
 
 /* Login page */
