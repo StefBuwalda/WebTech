@@ -23,7 +23,11 @@ COPY . .
 
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+
+RUN chmod -R 777 /app
+
 ENTRYPOINT ["/entrypoint.sh"]
+
 
 # Specify default command
 CMD ["python", "app.py"]
