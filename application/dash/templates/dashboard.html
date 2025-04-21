@@ -10,20 +10,23 @@
             <div class="col" onclick="location.href='{{service.url}}';" style="cursor: pointer;">
                 {{service["name"]}}
             </div>
-            
+
             <div class="col-sm-3 dots dropdown">
-                <button class="btn btn-light py-0" type="button" id="threeDotDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-light py-0" type="button" id="threeDotDropdown" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     &#x22EE;
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="threeDotDropdown">
                     <li>
-                        <a class="dropdown-item" href="{{ url_for('dash.edit_service', service_id=service.id) }}">Edit</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('dash.edit_service', service_id=service.id) }}">Edit</a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <form action="{{ url_for('dash.delete_service', service_id=service.id) }}" method="POST" style="display:inline;">
+                        <form action="{{ url_for('dash.delete_service', service_id=service.id) }}" method="POST"
+                            style="display:inline;">
                             <button style="color: red;" type="submit" class="dropdown-item">Delete</button>
                         </form>
                     </li>
@@ -32,7 +35,8 @@
         </div>
         <div class="row">
             <div class="col-sm-9" onclick="location.href='{{service.url}}';" style="cursor: pointer;">
-                <img class="fit-picture" src="{{ url_for('static', filename='icons/'+service['icon'])}}">
+                <img class="fit-picture" src="{{ url_for('static', filename='icons/'+service['icon'])}}"
+                    onerror="this.onerror=null; this.src='{{url_for('static', filename='google.png')}}';">
             </div>
         </div>
         <div class="row">
@@ -43,4 +47,4 @@
     </div>
     {% endfor %}
 </div>
-{%endblock%}  
+{%endblock%}

@@ -5,7 +5,7 @@ from flask_login import LoginManager  # type: ignore
 import os
 
 # App Config
-app = Flask(__name__)
+app = Flask(__name__, instance_relative_config=True)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///services.sqlite"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False  # Wat is dit?
 app.config["SECRET_KEY"] = "bvjchsygvduycgsyugc"  # Andere secret key
