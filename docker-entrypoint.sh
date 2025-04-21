@@ -3,7 +3,7 @@
 # ./wait-for-it.sh db:5432 --timeout=30 -- echo "DB is up"
 
 # Only run flask db init if migrations folder doesn't exist
-if [ ! -d "migrations" ]; then
+if [ ! -d "migrations" ] && [ -z "$(ls -A migrations)" ]; then
   flask db init
 fi
 
