@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///services.sqlite"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False  # Wat is dit?
 app.config["SECRET_KEY"] = "bvjchsygvduycgsyugc"  # Andere secret key
-app.config["UPLOAD_FOLDER"] = r"application\static\icons"
+app.config["UPLOAD_FOLDER"] = os.path.join("application", "static", "icons")
 
 # Ensure the upload folder exists
 os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)  # type: ignore
